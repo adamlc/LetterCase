@@ -12,7 +12,7 @@
 
 class LetterCase
 {
-    private $parts = [];
+    private $parts = array();
 
     /**
      * Parse input string.
