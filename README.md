@@ -9,7 +9,7 @@ This fork has moderinized the Class structure a bit, added composer support and 
 
 ```php
 <?php
-$letterCase = new LetterCase();
+$letterCase = new Adamlc\LetterCase\LetterCase();
 
 $snake_case = $letterCase->snake("PascalCase"); // => pascal_case
 $camelCase = $letterCase->camel("PascalCase"); // => pascalCase
