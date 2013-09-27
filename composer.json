@@ -1,5 +1,5 @@
 {
-    "name"        : "adamlc/LetterCase",
+    "name"        : "adamlc/lettercase",
     "type"        : "library",
     "description" : "A tool to convert from and to camelCase, snake_case, PascalCase and Path/Form",
     "homepage"    : "https://github.com/adamlc/LetterCase",
