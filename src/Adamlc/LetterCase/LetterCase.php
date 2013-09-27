@@ -15,20 +15,6 @@ class LetterCase
     private $parts = [];
 
     /**
-     * constructor
-     *
-     * @param string $str Input string.
-     */
-    public function __construct($str)
-    {
-        if (!is_string($str)) {
-            throw new LetterCaseException("parameter must be a string.");
-        }
-
-        return $this->parse($str);
-    }
-
-    /**
      * Parse input string.
      *
      * @param string $str Input string.
@@ -37,6 +23,10 @@ class LetterCase
      */
     private function parse($str)
     {
+        if (!is_string($str)) {
+            throw new LetterCaseException("parameter must be a string.");
+        }
+
         $str = trim($str);
 
         // path form
@@ -55,8 +45,6 @@ class LetterCase
 
         // camel/pascal case
         $this->parts = preg_split('/(?<=.)(?=[A-Z]([^A-Z]|$))/', $str);
-
-        return $this;
     }
 
     /**
@@ -64,8 +52,12 @@ class LetterCase
      *
      * @return string PascalCase
      */
-    public function pascal()
+    public function pascal($str)
     {
+        if (!is_null($str)) {
+            $this->parse($str);
+        }
+
         $parts = array_map(
             function ($part) {
                 return ucfirst($part);
@@ -81,8 +73,10 @@ class LetterCase
      *
      * @return string snake_case
      */
-    public function snake()
+    public function snake($str)
     {
+        $this->parse($str);
+
         $parts = array_map(
             function ($part) {
                 return strtolower($part);
@@ -98,11 +92,13 @@ class LetterCase
      *
      * @return string camelCase
      */
-    public function camel()
+    public function camel($str)
     {
+        $this->parse($str);
+
         $first_part = array_shift($this->parts);
 
-        return strtolower($first_part) . $this->pascal();
+        return strtolower($first_part) . $this->pascal(null);
     }
 
     /**
@@ -110,8 +106,10 @@ class LetterCase
      *
      * @return string Path/Form
      */
-    public function path()
+    public function path($str)
     {
+        $this->parse($str);
+
         return join('/', $this->parts);
     }
 }
